@@ -1,10 +1,33 @@
 import React from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 class Compte extends React.Component {
   state = {
     email: "",
     password: ""
+  };
+  handleChange = event => {
+    this.setState({ email: event.target.value });
+  };
+  handleChange2 = event => {
+    this.setState({ password: event.target.value });
+  };
+
+  handleSubmit = event => {
+    event.preventDefault();
+
+    const user = {
+      email: this.state.email,
+      password: this.state.password
+    };
+
+    axios
+      .post(`https://leboncoin-api.herokuapp.com/api/user/log_in`, { user })
+      .then(res => {
+        console.log(res);
+        console.log(res.data);
+      });
   };
 
   render() {
@@ -29,7 +52,12 @@ class Compte extends React.Component {
               value={this.state.password}
               onChange={this.handleChange}
             />
-            <button type="submit">Créer mon Compte Personnel</button>
+            <br />
+            <button type="submit">Se connecter</button>
+            <p>Vous n'avez pas de compte</p>
+            <button>
+              <Link to="/compte"> Se connecter</Link>
+            </button>
           </div>
         </form>
       </div>

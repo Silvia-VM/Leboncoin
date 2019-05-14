@@ -9,6 +9,37 @@ class Compte extends React.Component {
     passwordConfirmé: ""
   };
 
+  handleChange = event => {
+    this.setState({ username: event.target.value });
+  };
+  handleChange1 = event => {
+    this.setState({ email: event.target.value });
+  };
+  handleChange2 = event => {
+    this.setState({ password: event.target.value });
+  };
+  handleChange3 = event => {
+    this.setState({ passwordConfirmé: event.target.value });
+  };
+
+  handleSubmit = event => {
+    event.preventDefault();
+
+    const user = {
+      username: this.state.username,
+      email: this.state.email,
+      password: this.state.password,
+      password: this.state.passwordConfirmé
+    };
+
+    axios
+      .post(`https://leboncoin-api.herokuapp.com/api/user/log_in`, { user })
+      .then(res => {
+        console.log(res);
+        console.log(res.data);
+      });
+  };
+
   render() {
     return (
       <div>
@@ -30,7 +61,7 @@ class Compte extends React.Component {
                 type="text"
                 name="email"
                 value={this.state.email}
-                onChange={this.handleChange}
+                onChange={this.handleChange1}
               />
             </div>
             <div>
@@ -40,15 +71,15 @@ class Compte extends React.Component {
                 type="password"
                 name="password"
                 value={this.state.password}
-                onChange={this.handleChange}
+                onChange={this.handleChange2}
               />
               <h3>Confirmer le mot de passe</h3>
               <input
                 placeholder="PasswordConfirmé"
-                type="passwordConfirmé"
+                type="password"
                 name="passwordConfirmé"
                 value={this.state.passwordConfirmé}
-                onChange={this.handleChange}
+                onChange={this.handleChange3}
               />
             </div>
             <br />
@@ -81,17 +112,6 @@ class Compte extends React.Component {
       </div>
     );
   }
-
-  // async componentDidMount() {
-  //   try {
-  //     const response = await axios.post(
-  //       "https://leboncoin-api.herokuapp.com/api/user/sign_up"
-  //     );
-  //     this.setState({});
-  //   } catch (error) {
-  //     this.setState({});
-  //   }
-  // }
 }
 
 export default Compte;
