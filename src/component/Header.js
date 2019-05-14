@@ -6,11 +6,15 @@ class Header extends React.Component {
   render() {
     return (
       <div className="entete">
-        <img className="leboncoin" src={logo} alt="logo leboncoin" />
-        <Link to="/">Home</Link>
-        <Link to="/contact">Contact</Link>
-        <Link to="/about">About</Link>
-
+        <Link to="/">
+          <img className="leboncoin" src={logo} alt="logo leboncoin" />
+        </Link>
+        <Link to="/form">DEPOSER UNE ANNONCE </Link>
+        <Link to="/"> OFFRES</Link>
+        <div>
+          <Link to="/compte">Creer un compte </Link>
+          <Link to="/connection"> Se connecter</Link>
+        </div>
         <hr />
       </div>
     );
