@@ -13,7 +13,7 @@ class Header extends React.Component {
         <Link to="/"> OFFRES</Link>
         <div>
           <Link to="/compte">Creer un compte </Link>
-          <Link to="/connection"> Se connecter</Link>
+          <Link to="/connexion"> Se connecter</Link>
         </div>
         <hr />
       </div>
