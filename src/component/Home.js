@@ -15,10 +15,12 @@ class Home extends React.Component {
         <div>
           <div>Annonces :</div>
           <div>
-            {this.state.offers.map(offer => {
+            {this.state.offers.map((offer, index) => {
               return (
-                <div className="offer-div">
-                  <div className="image-div">Affichera l'image</div>
+                <div className="offer-div" key={index}>
+                  <div className="image-div" key={index}>
+                    Affichera l'image
+                  </div>
 
                   <div key={offer._id}>
                     <Link to={"/offer/" + offer._id}>
@@ -29,9 +31,6 @@ class Home extends React.Component {
               );
             })}
           </div>
-          <Link to="/">1</Link>
-          <Link onClick={() => this.setState({ skip: 25 })}>2</Link>
-          <Link onClick={() => this.setState({ skip: 50 })}>3</Link>
         </div>
       );
     } else {

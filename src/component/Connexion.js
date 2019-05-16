@@ -14,20 +14,28 @@ class Compte extends React.Component {
     this.setState({ password: event.target.value });
   };
 
-  handleSubmit = event => {
+  handleSubmit = async event => {
     event.preventDefault();
 
-    const user = {
-      email: this.state.email,
-      password: this.state.password
-    };
-
-    axios
-      .post(`https://leboncoin-api.herokuapp.com/api/user/log_in`, { user })
-      .then(res => {
-        console.log(res);
-        console.log(res.data);
+    try {
+      const response = await axios.post(
+        "https://leboncoin-api.herokuapp.com/api/user/log_in",
+        {
+          email: this.state.email,
+          password: this.state.password
+        }
+      );
+      console.log(response.data);
+      this.props.logIn({
+        id: response.data._id,
+        token: response.data.token,
+        username: response.data.account.username
       });
+      this.props.getUser(response.data.token, response.data.account.username);
+    } catch (error) {
+      this.setState({ error: error });
+    }
+    this.props.history.push("/");
   };
 
   render() {
@@ -38,25 +46,25 @@ class Compte extends React.Component {
           <div>
             <h3>Adresse email</h3>
             <input
-              placeholder="Email"
-              type="text"
+              type="email"
               name="email"
+              required={true}
               value={this.state.email}
               onChange={this.handleChange}
             />
             <h3>Mot de passe</h3>
             <input
-              placeholder="Password"
               type="password"
               name="password"
+              required={true}
               value={this.state.password}
-              onChange={this.handleChange}
+              onChange={this.handleChange2}
             />
             <br />
             <button type="submit">Se connecter</button>
-            <p>Vous n'avez pas de compte</p>
+            <p>Vous n'avez pas de compte? 🤔</p>
             <button>
-              <Link to="/compte"> Se connecter</Link>
+              <Link to="/compte"> Creer un compte </Link>
             </button>
           </div>
         </form>

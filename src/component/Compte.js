@@ -22,22 +22,28 @@ class Compte extends React.Component {
     this.setState({ passwordConfirmé: event.target.value });
   };
 
-  handleSubmit = event => {
+  handleSubmit = async event => {
     event.preventDefault();
 
-    const user = {
-      username: this.state.username,
-      email: this.state.email,
-      password: this.state.password,
-      password: this.state.passwordConfirmé
-    };
-
-    axios
-      .post(`https://leboncoin-api.herokuapp.com/api/user/log_in`, { user })
-      .then(res => {
-        console.log(res);
-        console.log(res.data);
+    try {
+      const response = await axios.post(
+        "https://leboncoin-api.herokuapp.com/api/user/sign_up",
+        {
+          email: this.state.email,
+          username: this.state.username,
+          password: this.state.password
+        }
+      );
+      console.log(response.data);
+      // L'utilisateur est authentifié, on envoie les infos à App
+      this.props.setUser({
+        id: response.data._id,
+        token: response.data.token,
+        username: response.data.account.username
       });
+    } catch (error) {
+      this.setState({ error: error });
+    }
   };
 
   render() {
@@ -90,7 +96,7 @@ class Compte extends React.Component {
                 name="Partenaire"
                 value="newsletter"
               />
-              <label for="subscribeNews">
+              <label>
                 Je souhaite recevoir des offres des partenaires du site
                 leboncoin susceptibles de m'intéresser
               </label>
@@ -101,9 +107,7 @@ class Compte extends React.Component {
                 name="condition"
                 value="newsletter"
               />
-              <label for="subscribeNews">
-                "J'accepte les Condition Générales de Vente"
-              </label>
+              <label>"J'accepte les Condition Générales de Vente"</label>
               <br />
               <button type="submit">Créer mon Compte Personnel</button>
             </div>
