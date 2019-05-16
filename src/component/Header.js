@@ -31,7 +31,7 @@ class Header extends React.Component {
         <Link to="/">
           <img className="leboncoin" src={logo} alt="logo leboncoin" />
         </Link>
-        <Link to="/Publish">DEPOSER UNE ANNONCE </Link>
+        <Link to="/connexion">DEPOSER UNE ANNONCE </Link>
         <Link to="/"> OFFRES</Link>
         <div>
           <Link to="/compte">Creer un compte </Link>

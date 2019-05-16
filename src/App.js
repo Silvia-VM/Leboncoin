@@ -85,16 +85,8 @@ class App extends React.Component {
             path="/offer/:id"
             render={props => <OfferItemPage {...props} user={user} />}
           />
-          {/* <Route
-            path="/publish"
-            render={props => <Publish {...props} user={user} />}
-          /> */}
         </div>
       </Router>
-      //  {/* <Route exact path="/" component={Home} />
-      //  <Route path="/offer/:id" component={OfferItemPage} />
-      //  <Route path="/compte" component={Compte} />
-      //  <Route path="/connexion" component={Connexion} /> */}
     );
   }
 }

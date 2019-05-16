@@ -26,6 +26,7 @@ class Publish extends React.Component {
         {
           title: this.state.title,
           description: this.state.description,
+          files: this.state.files,
           price: Number(this.state.price)
         },
         {
